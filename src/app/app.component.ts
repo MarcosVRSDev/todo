@@ -9,9 +9,9 @@ import { Todo } from './../models/todo.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  public mode = 'list';
   public todos: Todo[] = [];
-  public title: String = 'Minhas Tarefas';
+  public title: string = 'Minhas Tarefas';
   public form: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -40,7 +40,7 @@ export class AppComponent {
 
   remove(todo: Todo) {
     const index = this.todos.indexOf(todo);
-    if(index !== -1) {
+    if (index !== -1) {
       this.todos.splice(index, 1);
     }
     this.save();
@@ -63,11 +63,14 @@ export class AppComponent {
 
   load() {
     const data = JSON.parse(localStorage.getItem('todos'));
-    if(data){
+    if (data) {
       this.todos = data;
-    }else{
+    } else {
       this.todos = [];
     }
   }
-  
+
+  changeMode(mode: string) {
+    this.mode = mode;
+  }
 }
